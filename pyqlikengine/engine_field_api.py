@@ -24,8 +24,8 @@ class EngineFieldApi:
                           "params": []})
         response = self.engine_socket.send_call(self.engine_socket, msg)
         if 'error' in response:
-            error_msg = response["error"]["message"]
-            code = response["error"]["code"]
+            error_msg = json.loads(response)["error"]["message"]
+            code = json.loads(response)["error"]["code"]
             return "Error code - " + str(code) + ", Error Msg: " + error_msg
         else:
             return json.loads(response)["result"], json.loads(response)["change"]
